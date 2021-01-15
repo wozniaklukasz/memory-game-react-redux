@@ -1,12 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
-type User = {
-	name: string,
-	score: number,
-}
+import User from '../../types/User';
 
 const initialState: User = {
-	name: '',
+	name: 'TODO test',
 	score: 1000,
 }
 

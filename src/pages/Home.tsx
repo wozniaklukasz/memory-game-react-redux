@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {setName} from '../state/userSlice';
+import {setName} from '../state/user/userSlice';
+import Urls from '../consts/urls';
 
 function Home() {
 	const [userName, setUserName] = useState<string>('');
@@ -14,7 +15,7 @@ function Home() {
 
 	const handleOnPlayClick = () => {
 		dispatch(setName(userName));
-		history.push('/game');
+		history.push(Urls.game);
 	}
 
 	return (

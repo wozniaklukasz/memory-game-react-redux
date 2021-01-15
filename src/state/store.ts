@@ -1,8 +1,10 @@
 import {combineReducers, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-import userSlice from './userSlice';
+import userSlice from './user/userSlice';
+import scoreBoardSlice from './scoreBoard/scoreBoardSlice';
 
 const reducer = combineReducers({
-	user: userSlice.reducer
+	user: userSlice.reducer,
+	scoreBoard: scoreBoardSlice.reducer,
 });
 
 const middleware = getDefaultMiddleware({
@@ -12,6 +14,8 @@ const middleware = getDefaultMiddleware({
 const store = configureStore({
 	reducer,
 	middleware,
-})
+});
+
+export type RootState = ReturnType<typeof reducer>;
 
 export default store;
