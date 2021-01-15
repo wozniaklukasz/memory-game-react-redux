@@ -112,7 +112,7 @@ function Game() {
 
 	return (
 		<>
-			<div className="card-wrapper">
+			<div className="cards-wrapper">
 				{renderCardPairs()}
 			</div>
 			<button onClick={handleFinishGame}>Finish</button>

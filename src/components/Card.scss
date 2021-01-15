@@ -1,20 +1,45 @@
-.card {
-	width: 74px;
-	height: 74px;
-	border: 10px solid red;
-	margin: 10px;
-	cursor: pointer;
+.card-wrapper {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  perspective: 600px;
 
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
+  .card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: right;
+    transition: transform 1s;
 
-	&--revealed {
-		border-color: green;
-	}
+    &--guessed,
+    &--revealed {
+      transform: translateX(-100%) rotateY(-180deg);
+    }
 
-	&--guessed {
-		border-color: blue;
-		cursor: auto;
-	}
+    &--guessed {
+      cursor: auto;
+    }
+
+    .card-side {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+
+      &--front {
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transform: rotateY(180deg);
+      }
+
+      &--back {
+        height: 100%;
+        background: black;
+      }
+    }
+  }
 }
