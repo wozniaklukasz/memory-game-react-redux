@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import Urls from '../consts/urls';
@@ -22,6 +22,7 @@ const generateRandomCardPairs = (): CardType[] => {
 			return {
 				id,
 				pairId,
+				guessed: false,
 			}
 		});
 }
@@ -32,17 +33,42 @@ function Game() {
 
 	const [cards, setCards] = useState<CardType[]>(generateRandomCardPairs());
 	const [revealedCards, setRevealedCards] = useState<CardType[]>([]);
+	const [guessedPairsCounter, setGuessedPairsCounter] = useState<number>(0);
+
+	const handleFinishGame = useCallback(() => {
+		history.push(Urls.scoreBoard);
+	}, [history]);
+
+	useEffect(() => {
+		if (guessedPairsCounter === NUMBER_OF_PAIRS) {
+			handleFinishGame();
+		}
+	}, [guessedPairsCounter, handleFinishGame]);
+
+	const areCardsArePaired = (firstCard: CardType, secondCard: CardType) => firstCard.pairId === secondCard.pairId;
+
+	const setGuessedPair = (firstCard: CardType, secondCard: CardType) => {
+		setCards(prevState => {
+			const newCards = [...prevState];
+			newCards[firstCard.id] = {
+				...firstCard,
+				guessed: true,
+			};
+			newCards[secondCard.id] = {
+				...secondCard,
+				guessed: true,
+			};
+
+			return newCards;
+		});
+
+		setGuessedPairsCounter(prevState => ++prevState);
+	};
+
+	const isCardRevealed = (id: number): boolean => !!revealedCards.find(card => card.id === id);
 
 	const changeScore = (isGoodGuess: boolean) => {
 		dispatch(addToScore(isGoodGuess ? GOOD_GUESS_SCORE : BAD_GUESS_SCORE));
-	}
-
-	const handleFinishGame = () => {
-		history.push(Urls.scoreBoard);
-	}
-
-	const handleResetClick = () => {
-		setCards(generateRandomCardPairs());
 	}
 
 	const handleOnCardClick = (card: CardType) => {
@@ -50,7 +76,10 @@ function Game() {
 			const newRevealedCards = [...prevState, card];
 
 			if (prevState.length === 1) {
-				if (areCardsArePaired(prevState[0], card)) {
+				const firstCard = prevState[0];
+
+				if (areCardsArePaired(firstCard, card)) {
+					setGuessedPair(firstCard, card);
 					changeScore(true);
 					return [];
 				} else {
@@ -67,15 +96,12 @@ function Game() {
 		}));
 	}
 
-	const areCardsArePaired = (firstCard: CardType, secondCard: CardType) => firstCard.pairId === secondCard.pairId;
-
-	const isCardRevealed = (id: number): boolean => !!revealedCards.find(card => card.id === id);
-
 	const renderCardPairs = () => cards.map((card) => (
 		<Card
 			key={card.id}
 			id={card.id}
 			pairId={card.pairId}
+			guessed={card.guessed}
 			revealed={isCardRevealed(card.id)}
 			onCardClick={handleOnCardClick}
 		/>
@@ -86,7 +112,6 @@ function Game() {
 			<div className="card-wrapper">
 				{renderCardPairs()}
 			</div>
-			<button onClick={handleResetClick}>Reset</button>
 			<button onClick={handleFinishGame}>Finish</button>
 		</>
 	)

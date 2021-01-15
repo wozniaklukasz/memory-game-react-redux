@@ -8,4 +8,9 @@
 	&--revealed {
 		border-color: green;
 	}
+
+	&--guessed {
+		border-color: blue;
+		cursor: auto;
+	}
 }
