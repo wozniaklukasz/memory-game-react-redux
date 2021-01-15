@@ -8,9 +8,13 @@ type CardProps = CardType & {
 }
 
 function Card({id, pairId, revealed, guessed, onCardClick}: CardProps) {
-	const handleOnCardClick = () => onCardClick({
-		id, pairId, guessed
-	});
+	const handleOnCardClick = () => {
+		if (guessed || revealed) return;
+
+		onCardClick({
+			id, pairId, guessed
+		});
+	};
 
 	const getCardClassName = (): string => {
 		const cn = "card";
@@ -23,8 +27,9 @@ function Card({id, pairId, revealed, guessed, onCardClick}: CardProps) {
 
 	return (
 		<div className="card-wrapper">
-			<div className={getCardClassName()} onClick={guessed ? () => {
-			} : handleOnCardClick}>
+			<div
+				className={getCardClassName()}
+				onClick={handleOnCardClick}>
 				<div className="card-side card-side--front" style={{backgroundImage: `url(${pairId})`}}/>
 				<div className="card-side card-side--back"/>
 			</div>

@@ -1,6 +1,6 @@
 .card-wrapper {
-  width: 100px;
-  height: 100px;
+  width: 10em;
+  height: 15em;
   margin: 10px;
   perspective: 600px;
 
@@ -16,20 +16,21 @@
     &--guessed,
     &--revealed {
       transform: translateX(-100%) rotateY(-180deg);
-    }
-
-    &--guessed {
       cursor: auto;
     }
 
     .card-side {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       backface-visibility: hidden;
+      border: 10px solid #fffdd4;
+      border-radius: 5px;
 
       &--front {
-        height: 100%;
+        background-color: #c1c0a1;
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
@@ -37,8 +38,25 @@
       }
 
       &--back {
-        height: 100%;
-        background: black;
+        $color2: #80c9dd;
+        $color3: #d5eaf0;
+        $color1: #62bbd3;
+
+        background-color: $color1;
+        background-image: linear-gradient(30deg, $color2 12%, transparent 12.5%, transparent 87%, $color2 87.5%, $color2),
+        linear-gradient(150deg, $color2 12%, transparent 12.5%, transparent 87%, $color2 87.5%, $color2),
+        linear-gradient(30deg, $color2 12%, transparent 12.5%, transparent 87%, $color2 87.5%, $color2),
+        linear-gradient(150deg, $color2 12%, transparent 12.5%, transparent 87%, $color2 87.5%, $color2),
+        linear-gradient(60deg, $color3 25%, transparent 25.5%, transparent 75%, $color3 75%, $color3),
+        linear-gradient(60deg, $color3 25%, transparent 25.5%, transparent 75%, $color3 75%, $color3);
+        background-size:40px 70px;
+        background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+      }
+    }
+
+    &--guessed {
+      .card-side--front {
+        border-color: #b0ffb5;
       }
     }
   }

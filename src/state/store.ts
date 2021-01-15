@@ -18,4 +18,5 @@ const store = configureStore({
 
 export type RootState = ReturnType<typeof reducer>;
 
+// todo: persist
 export default store;
