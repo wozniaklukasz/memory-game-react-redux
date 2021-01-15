@@ -22,10 +22,8 @@ function Card({id, pairId, revealed, guessed, onCardClick}: CardProps) {
 	}
 
 	return (
-		<div className={getCardClassName()} onClick={guessed ? () => {} : handleOnCardClick}>
-			<div>id: {id}</div>
-			<div>pair: {pairId}</div>
-			<div>revealed {revealed.toString()}</div>
+		<div className={getCardClassName()} onClick={guessed ? () => {} : handleOnCardClick} style={{backgroundImage: `url(${pairId})`}}>
+			{id}
 		</div>
 	)
 }

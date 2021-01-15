@@ -5,6 +5,10 @@
 	margin: 10px;
 	cursor: pointer;
 
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+
 	&--revealed {
 		border-color: green;
 	}

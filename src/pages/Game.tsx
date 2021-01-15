@@ -7,13 +7,16 @@ import Card from '../components/Card';
 import './Game.scss';
 import CardType from '../types/CardType';
 import {BAD_GUESS_SCORE, GOOD_GUESS_SCORE, NUMBER_OF_PAIRS} from '../consts/game';
+import {AvatarGenerator} from 'random-avatar-generator';
 
-const generateRandomCardPairs = (): CardType[] => {
-	const cardsPairNumbers: number[] = [];
+const generateRandomCardPairs = () => {
+	const cardsPairNumbers: any[] = [];
+	const generator = new AvatarGenerator();
 
 	for (let i = 0; i < NUMBER_OF_PAIRS; i++) {
-		cardsPairNumbers.push(i);
-		cardsPairNumbers.push(i);
+		const pairId = generator.generateRandomAvatar();
+		cardsPairNumbers.push(pairId);
+		cardsPairNumbers.push(pairId);
 	}
 
 	return cardsPairNumbers

@@ -1,6 +1,6 @@
 type CardType = {
 	id: number,
-	pairId: number,
+	pairId: string,
 	guessed: boolean,
 }
 
