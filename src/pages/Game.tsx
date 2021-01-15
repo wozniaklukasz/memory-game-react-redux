@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import Urls from '../consts/urls';
@@ -23,7 +23,6 @@ const generateRandomCardPairs = (): CardType[] => {
 			return {
 				id,
 				pairId,
-				faceUp: false,
 			}
 		});
 }
@@ -33,6 +32,7 @@ function Game() {
 	const dispatch = useDispatch();
 
 	const [cards, setCards] = useState<CardType[]>(generateRandomCardPairs());
+	const [revealedCards, setRevealedCards] = useState<CardType[]>([]);
 
 	const handleFinishGame = () => {
 		dispatch(addToScore(Math.floor((Math.random() * 100) + 1) * (Math.random() < 0.5 ? 1 : -1)));
@@ -43,22 +43,37 @@ function Game() {
 		setCards(generateRandomCardPairs());
 	}
 
-	const handleOnCardClick = (card: CardType) => {
-		const newCards = [...cards];
-		newCards[card.id] = {
-			...card,
-			faceUp: true,
-		};
+	useEffect(() => {
+		console.log('revealed', revealedCards)
+	}, [revealedCards])
 
-		setCards(newCards);
+	const handleOnCardClick = (card: CardType) => {
+		setRevealedCards((prevState => {
+			const newRevealedCards = [...prevState, card];
+
+			if (prevState.length === 1) {
+				console.log(areCardsArePaired(prevState[0], card));
+				return newRevealedCards;
+			}
+
+			if (prevState.length === 2) {
+				return [card];
+			}
+
+			return newRevealedCards;
+		}));
 	}
 
-	const renderCardPairs = () => cards.map((card, i) => (
+	const areCardsArePaired = (firstCard: CardType, secondCard: CardType) => firstCard.pairId === secondCard.pairId;
+
+	const isCardRevealed = (id: number): boolean => !!revealedCards.find(card => card.id === id);
+
+	const renderCardPairs = () => cards.map((card) => (
 		<Card
 			key={card.id}
 			id={card.id}
 			pairId={card.pairId}
-			faceUp={card.faceUp}
+			revealed={isCardRevealed(card.id)}
 			onCardClick={handleOnCardClick}
 		/>
 	));

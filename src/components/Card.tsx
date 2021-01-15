@@ -4,18 +4,19 @@ import CardType from '../types/CardType';
 
 type CardProps = CardType & {
 	onCardClick: (card: CardType) => void,
+	revealed: boolean,
 }
 
-function Card({id, pairId, faceUp, onCardClick}: CardProps) {
+function Card({id, pairId, revealed, onCardClick}: CardProps) {
 	const handleOnCardClick = () => onCardClick({
-		id, pairId, faceUp
+		id, pairId
 	});
 
 	return (
-		<div className={faceUp ? "card card--face-up" : "card"} onClick={handleOnCardClick}>
+		<div className={revealed ? "card card--revealed" : "card"} onClick={handleOnCardClick}>
 			<div>id: {id}</div>
 			<div>pair: {pairId}</div>
-			<div>faceUp {faceUp.toString()}</div>
+			<div>revealed {revealed.toString()}</div>
 		</div>
 	)
 }
