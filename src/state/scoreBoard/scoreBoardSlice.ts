@@ -1,13 +1,14 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import User from '../../types/User';
+import UserType from '../../types/UserType';
 
-const initialState: User[] = [];
+const initialState: UserType[] = [];
 
 const scoreBoardSlice = createSlice({
 	name: 'scoreBoard',
 	initialState,
 	reducers: {
-		addScore: (state: User[], action: PayloadAction<User>) => {
+		// todo: add sort by score
+		addScore: (state: UserType[], action: PayloadAction<UserType>) => {
 			state.push(action.payload);
 		},
 	}

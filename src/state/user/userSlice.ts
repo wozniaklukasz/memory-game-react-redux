@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import User from '../../types/User';
+import UserType from '../../types/UserType';
 
-const initialState: User = {
+const initialState: UserType = {
 	name: 'TODO test',
 	score: 1000,
 }
@@ -10,13 +10,13 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		setName: (state: User, action: PayloadAction<string>) => {
+		setName: (state: UserType, action: PayloadAction<string>) => {
 			state.name = action.payload
 		},
-		setScore: (state: User, action: PayloadAction<number>) => {
+		setScore: (state: UserType, action: PayloadAction<number>) => {
 			state.score = action.payload
 		},
-		addToScore: (state: User, action: PayloadAction<number>) => {
+		addToScore: (state: UserType, action: PayloadAction<number>) => {
 			state.score += action.payload
 		},
 	}

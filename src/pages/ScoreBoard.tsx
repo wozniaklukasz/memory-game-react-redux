@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addScore} from '../state/scoreBoard/scoreBoardSlice';
 import {selectUser} from '../state/user/userSelector';
 import {selectScoreBoard} from '../state/scoreBoard/scoreBoardSelector';
-import User from '../types/User';
+import UserType from '../types/UserType';
 import Urls from '../consts/urls';
 
 function ScoreBoard() {
@@ -27,7 +27,7 @@ function ScoreBoard() {
 			Score Board:
 			<ol>
 				{
-					scoreBoard.map((sb: User, i: number) => (<li key={[sb.name, i].join()}>{sb.name} - {sb.score}p.</li>))
+					scoreBoard.map((sb: UserType, i: number) => (<li key={[sb.name, i].join()}>{sb.name} - {sb.score}p.</li>))
 				}
 			</ol>
 			<button onClick={handleBackToStartClick}>Back to start</button>
