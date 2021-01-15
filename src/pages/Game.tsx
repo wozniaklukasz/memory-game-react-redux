@@ -6,8 +6,7 @@ import {addToScore} from '../state/user/userSlice';
 import Card from '../components/Card';
 import './Game.scss';
 import CardType from '../types/CardType';
-
-const NUMBER_OF_PAIRS = 10;
+import {BAD_GUESS_SCORE, GOOD_GUESS_SCORE, NUMBER_OF_PAIRS} from '../consts/game';
 
 const generateRandomCardPairs = (): CardType[] => {
 	const cardsPairNumbers: number[] = [];
@@ -34,8 +33,11 @@ function Game() {
 	const [cards, setCards] = useState<CardType[]>(generateRandomCardPairs());
 	const [revealedCards, setRevealedCards] = useState<CardType[]>([]);
 
+	const changeScore = (isGoodGuess: boolean) => {
+		dispatch(addToScore(isGoodGuess ? GOOD_GUESS_SCORE : BAD_GUESS_SCORE));
+	}
+
 	const handleFinishGame = () => {
-		dispatch(addToScore(Math.floor((Math.random() * 100) + 1) * (Math.random() < 0.5 ? 1 : -1)));
 		history.push(Urls.scoreBoard);
 	}
 
@@ -43,17 +45,18 @@ function Game() {
 		setCards(generateRandomCardPairs());
 	}
 
-	useEffect(() => {
-		console.log('revealed', revealedCards)
-	}, [revealedCards])
-
 	const handleOnCardClick = (card: CardType) => {
 		setRevealedCards((prevState => {
 			const newRevealedCards = [...prevState, card];
 
 			if (prevState.length === 1) {
-				console.log(areCardsArePaired(prevState[0], card));
-				return newRevealedCards;
+				if (areCardsArePaired(prevState[0], card)) {
+					changeScore(true);
+					return [];
+				} else {
+					changeScore(false);
+					return newRevealedCards;
+				}
 			}
 
 			if (prevState.length === 2) {
