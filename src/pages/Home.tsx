@@ -1,30 +1,32 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useHistory} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setName} from '../state/user/userSlice';
 import Urls from '../consts/urls';
+import {selectUser} from '../state/user/userSelector';
 
 function Home() {
-	const [userName, setUserName] = useState<string>('');
 	const history = useHistory();
 	const dispatch = useDispatch();
 
+	const user = useSelector(selectUser);
+
 	const handleUserNameChange = (event: React.FormEvent<HTMLInputElement>) => {
-		setUserName(event.currentTarget.value)
+		dispatch(setName(event.currentTarget.value));
 	}
 
 	const handleOnPlayClick = () => {
-		dispatch(setName(userName));
 		history.push(Urls.game);
 	}
 
 	return (
-		<div>
-			Enter Your name: <input value={userName} onChange={handleUserNameChange}/>
-			<button disabled={!userName} onClick={handleOnPlayClick}>
-				Play!
-			</button>
-		</div>
+		<form onSubmit={handleOnPlayClick}>
+			<label>
+				Enter Your name:
+				<input value={user.name} onChange={handleUserNameChange}/>
+			</label>
+			<input disabled={!user.name} type="submit" value="Play!"/>
+		</form>
 	)
 }
 

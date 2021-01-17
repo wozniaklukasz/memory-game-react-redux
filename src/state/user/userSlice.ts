@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import UserType from '../../types/UserType';
 
 const initialState: UserType = {
-	name: 'TODO test',
+	name: '',
 	score: 1000,
 }
 
