@@ -1,4 +1,51 @@
+@import "src/style/variables";
+
+html, body {
+  font-family: Lato, Helvetica, Arial, sans-serif;
+  background: black;
+}
+
 #root {
   height: 100vh;
-  background: #7a7a7a;
+  background: linear-gradient($color1, $color3);
+}
+
+input:not([type="submit"]) {
+  border: none;
+  border-bottom: 1px solid $color4;
+  background: transparent;
+  padding: 13px;
+
+  &:focus {
+    border-color: $color5;
+    outline: none;
+  }
+}
+
+button,
+input[type=submit] {
+  border: 1px solid transparent;
+  color: white;
+  padding: 13px 50px;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: $color4;
+  display: block;
+  margin: 25px auto 0;
+
+  &:hover {
+    background-color: $color5;
+    color: white;
+  }
+
+  &:active {
+    border-color: white;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }

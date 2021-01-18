@@ -27,7 +27,8 @@ function ScoreBoard() {
 			Score Board:
 			<ol>
 				{
-					scoreBoard.map((sb: UserType, i: number) => (<li key={[sb.name, i].join()}>{sb.name} - {sb.score}p.</li>))
+					scoreBoard.map((sb: UserType, i: number) => (
+						<li key={[sb.name, i].join()}>{sb.name} - {sb.score}p.</li>))
 				}
 			</ol>
 			<button onClick={handleBackToStartClick}>Back to start</button>

@@ -21,13 +21,13 @@ function Home() {
 
 	return (
 		<div className="animated-view">
-		<form onSubmit={handleOnPlayClick}>
-			<label>
-				Enter Your name:
-				<input value={user.name} onChange={handleUserNameChange}/>
-			</label>
-			<input disabled={!user.name} type="submit" value="Play!"/>
-		</form>
+			<form onSubmit={handleOnPlayClick}>
+				<label>
+					Enter Your name:
+					<input value={user.name} onChange={handleUserNameChange}/>
+				</label>
+				<input disabled={!user.name} type="submit" value="Play!"/>
+			</form>
 		</div>
 	)
 }

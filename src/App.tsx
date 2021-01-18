@@ -3,7 +3,6 @@ import './App.scss';
 import {
 	Switch,
 	Route,
-	Redirect,
 	useLocation
 } from 'react-router-dom';
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
@@ -21,7 +20,7 @@ function App() {
 
 	const cssTransitionProps = {
 		key: location.pathname,
-		timeout: {enter: 2000, exit: 2000},
+		timeout: {enter: 600, exit: 600},
 		appear: true,
 	};
 
@@ -38,7 +37,6 @@ function App() {
 					<Route path={Urls.scoreBoard}>
 						<ScoreBoard/>
 					</Route>
-					<Redirect to={Urls.home}/>
 				</Switch>
 			</CSSTransition>
 		</TransitionGroup>
