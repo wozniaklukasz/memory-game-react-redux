@@ -15,7 +15,8 @@ function Home() {
 		dispatch(setName(event.currentTarget.value));
 	}
 
-	const handleOnPlayClick = () => {
+	const handleOnPlayClick = (e: React.FocusEvent<HTMLFormElement>) => {
+		e.preventDefault();
 		history.push(Urls.game);
 	}
 
