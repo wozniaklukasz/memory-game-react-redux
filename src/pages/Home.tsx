@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {setName} from '../state/user/userSlice';
+import {setName, resetUser} from '../state/user/userSlice';
 import Urls from '../consts/urls';
 import {selectUser} from '../state/user/userSelector';
 
@@ -10,6 +10,10 @@ function Home() {
 	const dispatch = useDispatch();
 
 	const user = useSelector(selectUser);
+
+	useEffect(() => {
+		dispatch(resetUser());
+	}, [dispatch]);
 
 	const handleUserNameChange = (event: React.FormEvent<HTMLInputElement>) => {
 		dispatch(setName(event.currentTarget.value));

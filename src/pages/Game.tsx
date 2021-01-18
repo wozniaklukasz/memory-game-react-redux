@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Urls from '../consts/urls';
 import {addToScore} from '../state/user/userSlice';
 import Card from '../components/Card';
@@ -8,6 +8,9 @@ import './Game.scss';
 import CardType from '../types/CardType';
 import {BAD_GUESS_SCORE, GOOD_GUESS_SCORE, NUMBER_OF_PAIRS, REVEALED_CARDS_TIMEOUT} from '../consts/game';
 import {AvatarGenerator} from 'random-avatar-generator';
+import {addScore} from '../state/scoreBoard/scoreBoardSlice';
+import {selectUser} from '../state/user/userSelector';
+import UserType from '../types/UserType';
 
 const generateRandomCardPairs = () => {
 	const cardsPairNumbers: any[] = [];
@@ -36,6 +39,9 @@ function Game() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
+	const userRef = useRef<UserType>();
+	userRef.current = useSelector(selectUser);
+
 	const [cards, setCards] = useState<CardType[]>(generateRandomCardPairs());
 	const [revealedCards, setRevealedCards] = useState<CardType[]>([]);
 	const [guessedPairsCounter, setGuessedPairsCounter] = useState<number>(0);
@@ -49,6 +55,16 @@ function Game() {
 			handleFinishGame();
 		}
 	}, [guessedPairsCounter, handleFinishGame]);
+
+	useEffect(() => {
+		return () => {
+			if (userRef) {
+				// @ts-ignore
+				dispatch(addScore(userRef.current));
+			}
+			clearTimeout(revealedTimer);
+		}
+	}, [dispatch])
 
 	const areCardsArePaired = (firstCard: CardType, secondCard: CardType) => firstCard.pairId === secondCard.pairId;
 
