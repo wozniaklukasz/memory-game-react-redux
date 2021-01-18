@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.scss';
 import {
 	Switch,
@@ -13,6 +13,11 @@ import Urls from './consts/urls';
 
 function App() {
 	const location = useLocation();
+	const [loaded, setLoaded] = useState<boolean>(false);
+
+	useEffect(() => {
+		setLoaded(true);
+	}, [])
 
 	return (
 		<TransitionGroup component="main">
@@ -20,6 +25,7 @@ function App() {
 				key={location.pathname}
 				timeout={{enter: 600, exit: 600}}
 				appear
+				in={loaded}
 			>
 				<Switch location={location}>
 					<Route exact path={Urls.home}>
