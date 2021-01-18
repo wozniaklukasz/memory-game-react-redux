@@ -6,7 +6,7 @@ import {addToScore} from '../state/user/userSlice';
 import Card from '../components/Card';
 import './Game.scss';
 import CardType from '../types/CardType';
-import {BAD_GUESS_SCORE, GOOD_GUESS_SCORE, NUMBER_OF_PAIRS} from '../consts/game';
+import {BAD_GUESS_SCORE, GOOD_GUESS_SCORE, NUMBER_OF_PAIRS, REVEALED_CARDS_TIMEOUT} from '../consts/game';
 import {AvatarGenerator} from 'random-avatar-generator';
 
 const generateRandomCardPairs = () => {
@@ -29,6 +29,8 @@ const generateRandomCardPairs = () => {
 			}
 		});
 }
+
+let revealedTimer: any = null;
 
 function Game() {
 	const history = useHistory();
@@ -79,6 +81,10 @@ function Game() {
 			const newRevealedCards = [...prevState, card];
 
 			if (prevState.length === 1) {
+				revealedTimer = setTimeout(() => {
+					setRevealedCards([]);
+				}, REVEALED_CARDS_TIMEOUT);
+
 				const firstCard = prevState[0];
 
 				if (areCardsArePaired(firstCard, card)) {
@@ -92,9 +98,11 @@ function Game() {
 			}
 
 			if (prevState.length === 2) {
+				clearTimeout(revealedTimer);
 				return [card];
 			}
 
+			clearTimeout(revealedTimer);
 			return newRevealedCards;
 		}));
 	}
