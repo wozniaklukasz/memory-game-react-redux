@@ -139,7 +139,6 @@ function Game() {
 			<div className="cards-wrapper">
 				{renderCardPairs()}
 			</div>
-			<button onClick={handleFinishGame}>Finish</button>
 		</div>
 	)
 }

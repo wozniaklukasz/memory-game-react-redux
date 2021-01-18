@@ -7,9 +7,10 @@ const scoreBoardSlice = createSlice({
 	name: 'scoreBoard',
 	initialState,
 	reducers: {
-		// todo: add sort by score
 		addScore: (state: UserType[], action: PayloadAction<UserType>) => {
-			state.push(action.payload);
+			const newState = [...state];
+			newState.push(action.payload);
+			return newState.sort((a, b) => (a.score < b.score) ? 1 : -1)
 		},
 	}
 });

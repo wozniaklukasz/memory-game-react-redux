@@ -2,12 +2,12 @@
 
 html, body {
   font-family: Lato, Helvetica, Arial, sans-serif;
-  background: black;
+  background-image: linear-gradient($color1, $color3);
+  background-attachment: fixed;
 }
 
 #root {
   height: 100vh;
-  background: linear-gradient($color1, $color3);
 }
 
 input:not([type="submit"]) {

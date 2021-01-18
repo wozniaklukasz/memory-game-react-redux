@@ -14,19 +14,13 @@ import Urls from './consts/urls';
 function App() {
 	const location = useLocation();
 
-	const transitionGroupProps = {
-		component: "main",
-	};
-
-	const cssTransitionProps = {
-		key: location.pathname,
-		timeout: {enter: 600, exit: 600},
-		appear: true,
-	};
-
 	return (
-		<TransitionGroup {...transitionGroupProps}>
-			<CSSTransition {...cssTransitionProps}>
+		<TransitionGroup component="main">
+			<CSSTransition
+				key={location.pathname}
+				timeout={{enter: 600, exit: 600}}
+				appear
+			>
 				<Switch location={location}>
 					<Route exact path={Urls.home}>
 						<Home/>
