@@ -23,7 +23,7 @@ function ScoreBoard() {
 	}
 
 	return (
-		<div>
+		<div className="animated-view">
 			Score Board:
 			<ol>
 				{

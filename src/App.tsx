@@ -3,18 +3,32 @@ import './App.scss';
 import {
 	Switch,
 	Route,
-	Redirect
+	Redirect,
+	useLocation
 } from 'react-router-dom';
+import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import Home from './pages/Home';
 import Game from './pages/Game';
 import ScoreBoard from './pages/ScoreBoard';
 import Urls from './consts/urls';
 
 function App() {
+	const location = useLocation();
+
+	const transitionGroupProps = {
+		component: "main",
+	};
+
+	const cssTransitionProps = {
+		key: location.pathname,
+		timeout: {enter: 2000, exit: 2000},
+		appear: true,
+	};
+
 	return (
-		<div className="app">
-			<div className="app-content">
-				<Switch>
+		<TransitionGroup {...transitionGroupProps}>
+			<CSSTransition {...cssTransitionProps}>
+				<Switch location={location}>
 					<Route exact path={Urls.home}>
 						<Home/>
 					</Route>
@@ -24,10 +38,10 @@ function App() {
 					<Route path={Urls.scoreBoard}>
 						<ScoreBoard/>
 					</Route>
-					<Redirect to={Urls.home} />
+					<Redirect to={Urls.home}/>
 				</Switch>
-			</div>
-		</div>
+			</CSSTransition>
+		</TransitionGroup>
 	);
 }
 

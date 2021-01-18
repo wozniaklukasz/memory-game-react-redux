@@ -111,12 +111,13 @@ function Game() {
 	));
 
 	return (
-		<>
-			<div className="cards-wrapper">
+		<div className="animated-view">
+
+		<div className="cards-wrapper">
 				{renderCardPairs()}
 			</div>
 			<button onClick={handleFinishGame}>Finish</button>
-		</>
+		</div>
 	)
 }
 

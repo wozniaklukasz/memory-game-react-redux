@@ -1,9 +1,31 @@
-.app {
+main {
   height: 100%;
   display: flex;
+}
 
-  .app-content {
-    align-self: center;
-    margin: 0 auto;
-  }
+.animated-view {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.appear,
+.enter {
+  opacity: 0;
+}
+
+.appear-active,
+.enter-active {
+  transition: 1s ease-in;
+  opacity: 1;
+}
+
+.exit {
+  transition: 1s ease-out;
+  opacity: 1;
+}
+
+.exit-active {
+  opacity: 0;
 }

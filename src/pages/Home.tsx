@@ -20,6 +20,7 @@ function Home() {
 	}
 
 	return (
+		<div className="animated-view">
 		<form onSubmit={handleOnPlayClick}>
 			<label>
 				Enter Your name:
@@ -27,6 +28,7 @@ function Home() {
 			</label>
 			<input disabled={!user.name} type="submit" value="Play!"/>
 		</form>
+		</div>
 	)
 }
 
