@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setName, resetUser} from '../state/user/userSlice';
 import Urls from '../consts/urls';
 import {selectUser} from '../state/user/userSelector';
+import {MotionDiv} from '../components/MotionDiv';
 
 function Home() {
 	const history = useHistory();
@@ -25,7 +26,7 @@ function Home() {
 	}
 
 	return (
-		<div className="animated-view">
+		<MotionDiv>
 			<form onSubmit={handleOnPlayClick}>
 				<label>
 					Enter Your name:
@@ -33,7 +34,7 @@ function Home() {
 				</label>
 				<input disabled={!user.name} type="submit" value="Play!"/>
 			</form>
-		</div>
+		</MotionDiv>
 	)
 }
 

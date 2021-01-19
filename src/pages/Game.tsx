@@ -11,6 +11,7 @@ import {AvatarGenerator} from 'random-avatar-generator';
 import {addScore} from '../state/scoreBoard/scoreBoardSlice';
 import {selectUser} from '../state/user/userSelector';
 import UserType from '../types/UserType';
+import {MotionDiv} from '../components/MotionDiv';
 
 const generateRandomCardPairs = () => {
 	const cardsPairNumbers: any[] = [];
@@ -135,11 +136,11 @@ function Game() {
 	));
 
 	return (
-		<div className="animated-view">
+		<MotionDiv>
 			<div className="cards-wrapper">
 				{renderCardPairs()}
 			</div>
-		</div>
+		</MotionDiv>
 	)
 }
 

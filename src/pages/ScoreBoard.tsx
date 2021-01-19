@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import {selectScoreBoard} from '../state/scoreBoard/scoreBoardSelector';
 import UserType from '../types/UserType';
 import Urls from '../consts/urls';
+import {MotionDiv} from '../components/MotionDiv';
 
 function ScoreBoard() {
 	const history = useHistory();
@@ -15,7 +16,7 @@ function ScoreBoard() {
 	}
 
 	return (
-		<div className="animated-view">
+		<MotionDiv>
 			Score Board:
 			<ol>
 				{
@@ -24,7 +25,7 @@ function ScoreBoard() {
 				}
 			</ol>
 			<button onClick={handleBackToStartClick}>Back to start</button>
-		</div>
+		</MotionDiv>
 	)
 }
 
