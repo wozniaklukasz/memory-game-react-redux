@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import Urls from '../consts/urls';
 import {addToScore} from '../state/user/userSlice';
 import Card from '../components/Card';
-import './Game.scss';
 import CardType from '../types/CardType';
 import {BAD_GUESS_SCORE, GOOD_GUESS_SCORE, NUMBER_OF_PAIRS, REVEALED_CARDS_TIMEOUT} from '../consts/game';
 import {AvatarGenerator} from 'random-avatar-generator';
@@ -137,9 +136,7 @@ function Game() {
 
 	return (
 		<MotionDiv>
-			<div className="cards-wrapper">
-				{renderCardPairs()}
-			</div>
+			{renderCardPairs()}
 		</MotionDiv>
 	)
 }

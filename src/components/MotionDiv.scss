@@ -1,14 +1,21 @@
 .motion {
 	position: absolute;
-	height: 80vh;
-	width: 80vw;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+	height: 100%;
+	width: 100%;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	margin: auto;
+
+	&--content {
+		padding: 50px 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		flex-direction: row;
+		width: 90vw;
+		margin: auto;
+	}
 }

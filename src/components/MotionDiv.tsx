@@ -22,6 +22,8 @@ export const MotionDiv = ({children}: any) => (
 			duration: 0.5
 		}}
 	>
-		{children}
+		<div className="motion--content">
+			{children}
+		</div>
 	</motion.div>
 );

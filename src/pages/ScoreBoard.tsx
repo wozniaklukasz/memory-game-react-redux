@@ -17,14 +17,16 @@ function ScoreBoard() {
 
 	return (
 		<MotionDiv>
-			Score Board:
-			<ol>
-				{
-					scoreBoard.map((sb: UserType, i: number) => (
-						<li key={[sb.name, i].join()}>{sb.name} - {sb.score}p.</li>))
-				}
-			</ol>
-			<button onClick={handleBackToStartClick}>Back to start</button>
+			<div>
+				Score Board:
+				<ol>
+					{
+						scoreBoard.map((sb: UserType, i: number) => (
+							<li key={[sb.name, i].join()}>{sb.name} - {sb.score}p.</li>))
+					}
+				</ol>
+				<button onClick={handleBackToStartClick}>Back to start</button>
+			</div>
 		</MotionDiv>
 	)
 }

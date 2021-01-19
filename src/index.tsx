@@ -5,7 +5,7 @@ import './style/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './state/store';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {HashRouter as Router} from 'react-router-dom';
 
 ReactDOM.render(
 	<Provider store={store}>
